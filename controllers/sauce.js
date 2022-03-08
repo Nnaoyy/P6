@@ -1,7 +1,6 @@
 const Sauce = require('../models/Sauce');
 const fs = require('fs');
 
-
 exports.createSauce = (req, res, next) => {
     const sauceObject = JSON.parse(req.body.sauce);
     delete sauceObject._id;
@@ -35,7 +34,7 @@ exports.deleteSauce = (req, res, next) => {
                 res.status(401).json({ error : new error('Requête non autorisée !')});
             }
             else {
-                //si c'est le bon utilisateur on supprime l'image du dossier images et on supprime la recette
+            //si c'est le bon utilisateur on supprime l'image du dossier images et on supprime la recette
             const filename = sauce.imageUrl.split('/images/')[1];
             fs.unlink(`images/${filename}`, () => {
                 Sauce.deleteOne({ _id: req.params.id})
